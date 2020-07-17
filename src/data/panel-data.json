@@ -1,0 +1,50 @@
+{
+  "panels": [
+    {
+      "name": "Matérias",
+      "columns": [
+        {
+          "name": "Pendente",
+          "color": "#000fff"
+        },
+        {
+          "name": "Pendente",
+          "color": "#000fff"
+        },
+        {
+          "name": "Pendente",
+          "color": "#000fff"
+        },
+        {
+          "name": "Pendente",
+          "color": "#000fff"
+        }
+      ]
+    },
+    {
+      "name": "Tarefas",
+      "columns": [
+        {
+          "name": "Backlog",
+          "color": "#f4fccc"
+        },
+        {
+          "name": "Sprint",
+          "color": "#f4fccc"
+        },
+        {
+          "name": "To Do",
+          "color": "#f4fccc"
+        },
+        {
+          "name": "Doing",
+          "color": "#f4fccc"
+        },
+        {
+          "name": "Done",
+          "color": "#f4fccc"
+        }
+      ]
+    },
+  ]
+}
