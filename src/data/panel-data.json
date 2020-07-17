@@ -1,48 +1,77 @@
 {
   "panels": [
     {
-      "name": "Matérias",
+      "name": "materias",
+      "domainName": "Matérias",
       "columns": [
         {
           "name": "Pendente",
-          "color": "#000fff"
+          "color": "#000fff",
+          "acceptedTypes": [
+            "text", "audio", "video"
+          ]
         },
         {
-          "name": "Pendente",
-          "color": "#000fff"
+          "name": "Aguardando aprovação",
+          "color": "#000fff",
+          "acceptedTypes": [
+            "text", "audio", "video"
+          ]
         },
         {
-          "name": "Pendente",
-          "color": "#000fff"
+          "name": "Revisão",
+          "color": "#000fff",
+          "acceptedTypes": [
+            "text"
+          ]
         },
         {
-          "name": "Pendente",
-          "color": "#000fff"
+          "name": "Publicada",
+          "color": "#000fff",
+          "acceptedTypes": [
+            "text", "audio", "video"
+          ]
         }
       ]
     },
     {
-      "name": "Tarefas",
+      "name": "tarefas",
+      "domainName": "Tarefas",
       "columns": [
         {
           "name": "Backlog",
-          "color": "#f4fccc"
+          "color": "#f4fccc",
+          "acceptedTypes": [
+            "text"
+          ]
         },
         {
           "name": "Sprint",
-          "color": "#f4fccc"
+          "color": "#f4fccc",
+          "acceptedTypes": [
+            "text"
+          ]
         },
         {
           "name": "To Do",
-          "color": "#f4fccc"
+          "color": "#f4fccc",
+          "acceptedTypes": [
+            "text"
+          ]
         },
         {
           "name": "Doing",
-          "color": "#f4fccc"
+          "color": "#f4fccc",
+          "acceptedTypes": [
+            "text"
+          ]
         },
         {
           "name": "Done",
-          "color": "#f4fccc"
+          "color": "#f4fccc",
+          "acceptedTypes": [
+            "text"
+          ]
         }
       ]
     }
