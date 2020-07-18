@@ -9,7 +9,6 @@ import data from '../../data/panel-data.json';
 interface PanelColumn {
   name: string;
   color: string;
-  acceptedTypes: string[];
 }
 
 interface Panel {

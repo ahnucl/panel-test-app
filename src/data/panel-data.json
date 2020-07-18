@@ -6,31 +6,19 @@
       "columns": [
         {
           "name": "Pendente",
-          "color": "#000fff",
-          "acceptedTypes": [
-            "text", "audio", "video"
-          ]
+          "color": "#000fff"
         },
         {
           "name": "Aguardando aprovação",
-          "color": "#000fff",
-          "acceptedTypes": [
-            "text", "audio", "video"
-          ]
+          "color": "#000fff"
         },
         {
           "name": "Revisão",
-          "color": "#000fff",
-          "acceptedTypes": [
-            "text"
-          ]
+          "color": "#000fff"
         },
         {
           "name": "Publicada",
-          "color": "#000fff",
-          "acceptedTypes": [
-            "text", "audio", "video"
-          ]
+          "color": "#000fff"
         }
       ]
     },
@@ -40,38 +28,23 @@
       "columns": [
         {
           "name": "Backlog",
-          "color": "#f4fccc",
-          "acceptedTypes": [
-            "text"
-          ]
+          "color": "#f4fccc"
         },
         {
           "name": "Sprint",
-          "color": "#f4fccc",
-          "acceptedTypes": [
-            "text"
-          ]
+          "color": "#f4fccc"
         },
         {
           "name": "To Do",
-          "color": "#f4fccc",
-          "acceptedTypes": [
-            "text"
-          ]
+          "color": "#f4fccc"
         },
         {
           "name": "Doing",
-          "color": "#f4fccc",
-          "acceptedTypes": [
-            "text"
-          ]
+          "color": "#f4fccc"
         },
         {
           "name": "Done",
-          "color": "#f4fccc",
-          "acceptedTypes": [
-            "text"
-          ]
+          "color": "#f4fccc"
         }
       ]
     }
