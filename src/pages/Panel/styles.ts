@@ -14,27 +14,26 @@ export const Container = styled.div`
     & + section {
       margin-left: 10px;
     }
+  }
+`;
 
-    > div {
-      /** Types Block */
-      border: solid;
-      /* max-height: 35px; */
-      display: flex;
+export const TypesContainer = styled.div`
+  /** Types Block */
+  border-bottom: solid 1px;
+  /* max-height: 35px; */
+  display: flex;
 
-      div {
-        margin: 5px;
+  div {
+    margin: 5px;
 
-        svg {
-          margin-right: 3px;
-        }
-      }
-    }
-
-    div + div {
-      /** Cards Block */
-      flex-direction: column;
+    svg {
+      margin-right: 3px;
     }
   }
 `;
 
-export const PanelColumn = styled.div``;
+export const CardsContainer = styled.div`
+  > div {
+    /** Cards */
+  }
+`;

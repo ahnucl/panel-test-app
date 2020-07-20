@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FiVideo, FiPaperclip } from 'react-icons/fi';
+import { FiVideo, FiPaperclip, FiVolume2 } from 'react-icons/fi';
+import { IconType } from 'react-icons';
 import data from '../../data/panel-data.json';
 
-import { Container, PanelColumn } from './styles';
+import { Container, TypesContainer, CardsContainer } from './styles';
 
 interface PanelColumn {
   name: string;
@@ -15,10 +16,20 @@ interface Panel {
   columns: PanelColumn[];
 }
 
+interface CardType {
+  name: string;
+  icon: string;
+}
+
 const Panel: React.FC = () => {
   const [panelStructure] = useState<Panel>(data.panels[0]);
+  const [cardTypes] = useState<CardType[]>(data.cardTypes);
 
-  console.log(panelStructure);
+  const CardTypesMapper: { [index: string]: IconType } = {
+    video: FiVideo,
+    audio: FiVolume2,
+    paperclip: FiPaperclip,
+  };
 
   return (
     <>
@@ -28,21 +39,22 @@ const Panel: React.FC = () => {
           <section key={column.name}>
             <h2>{column.name}</h2>
 
-            <div>
+            <TypesContainer>
               {/** Types space */}
-              <div>
-                <FiVideo />
-                <span>(1)</span>
-              </div>
-              <div>
-                <FiPaperclip />
-                <span>(2)</span>
-              </div>
-              <div />
-            </div>
+              {cardTypes.map(cardType => {
+                const IconToRender = CardTypesMapper[cardType.name];
 
-            <div>
-              {/** Card space */}
+                return (
+                  <div key={cardType.name}>
+                    <IconToRender />
+                    <span>(2)</span>
+                  </div>
+                );
+              })}
+            </TypesContainer>
+
+            {/** Card space */}
+            <CardsContainer>
               <div>
                 <h3>
                   <FiVideo />
@@ -50,6 +62,7 @@ const Panel: React.FC = () => {
                 </h3>
                 <p>Fulano de tal</p>
               </div>
+
               <div>
                 <h3>
                   <FiPaperclip />
@@ -57,6 +70,7 @@ const Panel: React.FC = () => {
                 </h3>
                 <p>João Ninguém</p>
               </div>
+
               <div>
                 <h3>
                   <FiPaperclip />
@@ -64,7 +78,7 @@ const Panel: React.FC = () => {
                 </h3>
                 <p>Ciclano</p>
               </div>
-            </div>
+            </CardsContainer>
           </section>
         ))}
       </Container>

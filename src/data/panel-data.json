@@ -1,4 +1,18 @@
 {
+  "cardTypes": [
+    {
+      "name": "video",
+      "icon": "FiVideo"
+    },
+    {
+      "name": "paperclip",
+      "icon": "FiSound2"
+    },
+    {
+      "name": "audio",
+      "icon": "FiPaperclip"
+    }
+  ],
   "panels": [
     {
       "name": "materias",
