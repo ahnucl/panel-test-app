@@ -9,6 +9,11 @@ export const Container = styled.div`
     border: solid;
     display: flex;
     justify-content: center;
+
+    h2 {
+      align-self: center;
+    }
+
     flex-direction: column;
 
     & + section {
@@ -18,10 +23,10 @@ export const Container = styled.div`
 `;
 
 export const TypesContainer = styled.div`
-  /** Types Block */
   border-bottom: solid 1px;
-  /* max-height: 35px; */
+
   display: flex;
+  justify-content: center;
 
   div {
     margin: 5px;
@@ -34,6 +39,17 @@ export const TypesContainer = styled.div`
 
 export const CardsContainer = styled.div`
   > div {
-    /** Cards */
+    /** Card */
+
+    height: 120px;
+    padding: 5px;
+    margin: 5px;
+
+    border: solid 1px;
+    border-radius: 5px;
+  }
+
+  svg {
+    margin-right: 5px;
   }
 `;
