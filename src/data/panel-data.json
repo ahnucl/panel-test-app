@@ -1,64 +1,145 @@
 {
-  "cardTypes": [
-    {
-      "name": "video",
-      "icon": "FiVideo"
-    },
-    {
-      "name": "paperclip",
-      "icon": "FiSound2"
-    },
-    {
-      "name": "audio",
-      "icon": "FiPaperclip"
-    }
-  ],
   "panels": [
     {
       "name": "materias",
       "domainName": "Matérias",
+      "cardTypes": [
+        {
+          "name": "video",
+          "icon": "FiVideo"
+        },
+        {
+          "name": "paperclip",
+          "icon": "FiSound2"
+        },
+        {
+          "name": "audio",
+          "icon": "FiPaperclip"
+        }
+      ],
       "columns": [
         {
+          "id": "1",
           "name": "Pendente",
           "color": "#000fff"
         },
         {
+          "id": "2",
           "name": "Aguardando aprovação",
           "color": "#000fff"
         },
         {
+          "id": "3",
           "name": "Revisão",
           "color": "#000fff"
         },
         {
+          "id": "4",
           "name": "Publicada",
           "color": "#000fff"
         }
-      ]
+      ],
+      "data": []
     },
     {
       "name": "tarefas",
       "domainName": "Tarefas",
+      "cardTypes": [
+        {
+          "name": "video",
+          "icon": "FiVideo"
+        },
+        {
+          "name": "paperclip",
+          "icon": "FiSound2"
+        },
+        {
+          "name": "audio",
+          "icon": "FiPaperclip"
+        },
+        {
+          "name": "email",
+          "icon": "FiMail"
+        },
+        {
+          "name": "ads",
+          "icon": "FiDollarSign"
+        }
+      ],
       "columns": [
         {
+          "id": "11",
           "name": "Backlog",
           "color": "#f4fccc"
         },
         {
+          "id": "12",
           "name": "Sprint",
           "color": "#f4fccc"
         },
         {
+          "id": "13",
           "name": "To Do",
           "color": "#f4fccc"
         },
         {
+          "id": "15",
           "name": "Doing",
           "color": "#f4fccc"
         },
         {
+          "id": "14",
           "name": "Done",
           "color": "#f4fccc"
+        }
+      ],
+      "data": [
+        {
+          "id":"22",
+          "types": [
+            "video"
+          ],
+          "author": "Fulano de Tal",
+          "title": "Lorem Ipsum, bla blka bla",
+          "column": "11"
+        },
+        {
+          "id":"21",
+          "types": [
+            "video",
+             "audio"
+          ],
+          "author": "João Ninguém",
+          "title": "Lorem Ipsum, bla blka bla",
+          "column": "12"
+        },
+        {
+          "id":"23",
+          "types": [
+            "paperclip"
+          ],
+          "author": "Ciclano",
+          "title": "Lorem Ipsum, bla blka bla",
+          "column": "11"
+        },
+        {
+          "id":"24",
+          "types": [
+            "ads"
+          ],
+          "author": "Leonardo Cunha",
+          "title": "Lorem Ipsum, bla blka bla",
+          "column": "11"
+        },
+        {
+          "id":"25",
+          "types": [
+            "ads",
+            "email"
+          ],
+          "author": "Leonardo Cunha",
+          "title": "Lorem Ipsum, bla blka bla 2222",
+          "column": "15"
         }
       ]
     }

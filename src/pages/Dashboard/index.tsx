@@ -7,14 +7,30 @@ import data from '../../data/panel-data.json';
  */
 
 interface PanelColumn {
+  id: string;
   name: string;
   color: string;
+}
+
+interface CardType {
+  name: string;
+  icon: string;
+}
+
+interface Card {
+  id: string;
+  types: string[];
+  author: string;
+  title: string;
+  column: string;
 }
 
 interface Panel {
   name: string;
   domainName: string;
   columns: PanelColumn[];
+  cardTypes: CardType[];
+  data: Card[];
 }
 
 const Dashboard: React.FC = () => {

@@ -1,34 +1,31 @@
 import React, { useState } from 'react';
-import { FiVideo, FiPaperclip, FiVolume2 } from 'react-icons/fi';
+import {
+  FiVideo,
+  FiPaperclip,
+  FiVolume2,
+  FiMail,
+  FiDollarSign,
+} from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import data from '../../data/panel-data.json';
 
 import { Container, TypesContainer, CardsContainer } from './styles';
 
-interface PanelColumn {
-  name: string;
-  color: string;
-}
-
-interface Panel {
-  name: string;
-  domainName: string;
-  columns: PanelColumn[];
-}
-
-interface CardType {
-  name: string;
-  icon: string;
-}
+/**
+ * Iterar pelas colunas, e futuramente por alguma regra de negócio para determinar as ações dos botões
+ */
 
 const Panel: React.FC = () => {
-  const [panelStructure] = useState<Panel>(data.panels[0]);
-  const [cardTypes] = useState<CardType[]>(data.cardTypes);
+  const [panelStructure] = useState(data.panels[1]);
+  const [cardTypes] = useState(panelStructure.cardTypes);
+  const [cards] = useState(panelStructure.data);
 
   const CardTypesMapper: { [index: string]: IconType } = {
     video: FiVideo,
     audio: FiVolume2,
     paperclip: FiPaperclip,
+    email: FiMail,
+    ads: FiDollarSign,
   };
 
   return (
@@ -36,7 +33,7 @@ const Panel: React.FC = () => {
       <h1>{panelStructure.domainName}</h1>
       <Container>
         {panelStructure.columns.map(column => (
-          <section key={column.name}>
+          <section key={column.id}>
             <h2>{column.name}</h2>
 
             <TypesContainer>
@@ -47,37 +44,47 @@ const Panel: React.FC = () => {
                 return (
                   <div key={cardType.name}>
                     <IconToRender />
-                    <span>(2)</span>
+                    <span>
+                      {cards.reduce(
+                        (acc, cur) =>
+                          cur.column === column.id &&
+                          cur.types.includes(cardType.name)
+                            ? acc + 1
+                            : acc,
+                        0,
+                      )}
+                    </span>
                   </div>
                 );
               })}
             </TypesContainer>
 
-            {/** Card space */}
             <CardsContainer>
-              <div>
-                <h3>
-                  <FiVideo />
-                  Título do card
-                </h3>
-                <p>Fulano de tal</p>
-              </div>
+              {/** Card space */}
+              {cards.map(card => {
+                if (card.column === column.id) {
+                  const IconsToRender = card.types.map(
+                    type => CardTypesMapper[type],
+                  );
 
-              <div>
-                <h3>
-                  <FiPaperclip />
-                  Título do card
-                </h3>
-                <p>João Ninguém</p>
-              </div>
-
-              <div>
-                <h3>
-                  <FiPaperclip />
-                  Título do card
-                </h3>
-                <p>Ciclano</p>
-              </div>
+                  return (
+                    /** Isso aqui é um componente! Está retornando JSX */
+                    <div key={card.id}>
+                      <h3>
+                        {IconsToRender.map(Icon => (
+                          <Icon />
+                        ))}
+                        {card.title}
+                      </h3>
+                      <p>{card.author}</p>
+                      <button>A</button>
+                      <button>B</button>
+                      <button>C</button>
+                    </div>
+                  );
+                }
+                return <> </>;
+              })}
             </CardsContainer>
           </section>
         ))}

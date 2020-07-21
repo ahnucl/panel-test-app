@@ -8,7 +8,6 @@ export const Container = styled.div`
     width: 300px;
     border: solid;
     display: flex;
-    justify-content: center;
 
     h2 {
       align-self: center;
