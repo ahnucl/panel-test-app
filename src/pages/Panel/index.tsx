@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
-import {
-  FiVideo,
-  FiPaperclip,
-  FiVolume2,
-  FiMail,
-  FiDollarSign,
-} from 'react-icons/fi';
-import { IconType } from 'react-icons';
+import React, { useState, useEffect } from 'react';
+
 import { uuid } from 'uuidv4';
+import CardTypesMapper from '../../data/CardTypesMapper';
+
 import data from '../../data/panel-data.json';
+import transitions from '../../data/transitions.json';
 
 import { Container, TypesContainer, CardsContainer } from './styles';
 
@@ -21,13 +17,14 @@ const Panel: React.FC = () => {
   const [cardTypes] = useState(panelStructure.cardTypes);
   const [cards, setCards] = useState(panelStructure.data);
 
-  const CardTypesMapper: { [index: string]: IconType } = {
-    video: FiVideo,
-    audio: FiVolume2,
-    paperclip: FiPaperclip,
-    email: FiMail,
-    ads: FiDollarSign,
-  };
+  useEffect(() => {
+    const type = 'type1';
+    const state = 'state2';
+    const TransitionButtons = transitions[type][state].map(transition => (
+      <button>{transition}</button>
+    ));
+    console.log(TransitionButtons);
+  }, []);
 
   function handleClick(to: string, from: string, cardId: string): void {
     const newCards = cards.map(card =>
@@ -109,7 +106,8 @@ const Panel: React.FC = () => {
                                 key={selfColumn.name}
                                 type="submit"
                                 onClick={() =>
-                                  handleClick(selfColumn.id, column.id, card.id)}
+                                  handleClick(selfColumn.id, column.id, card.id)
+                                }
                               >
                                 {selfColumn.name}
                               </button>

@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding: 20px;
 
   section {
     width: 300px;
-    border: solid;
     display: flex;
+    margin-top: 30px;
 
     h2 {
       align-self: center;
