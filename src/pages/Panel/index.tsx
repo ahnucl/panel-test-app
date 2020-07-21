@@ -18,7 +18,7 @@ import { Container, TypesContainer, CardsContainer } from './styles';
 const Panel: React.FC = () => {
   const [panelStructure] = useState(data.panels[1]);
   const [cardTypes] = useState(panelStructure.cardTypes);
-  const [cards] = useState(panelStructure.data);
+  const [cards, setCards] = useState(panelStructure.data);
 
   const CardTypesMapper: { [index: string]: IconType } = {
     video: FiVideo,
@@ -28,11 +28,23 @@ const Panel: React.FC = () => {
     ads: FiDollarSign,
   };
 
+  function handleClick(to: string, from: string, cardId: string): void {
+    console.log(cards);
+    console.log(to, from, cardId);
+    // Achar o card com cardId
+    // mudar a coluna
+    // salvar no estado
+    const newCards = cards.map(card =>
+      card.id === cardId ? { ...card, column: to } : card,
+    );
+    setCards(newCards);
+  }
+
   return (
     <>
       <h1>{panelStructure.domainName}</h1>
       <Container>
-        {panelStructure.columns.map(column => (
+        {panelStructure.columns.map((column, _, self) => (
           <section key={column.id}>
             <h2>{column.name}</h2>
 
@@ -77,9 +89,23 @@ const Panel: React.FC = () => {
                         {card.title}
                       </h3>
                       <p>{card.author}</p>
-                      <button>A</button>
-                      <button>B</button>
-                      <button>C</button>
+
+                      <div>
+                        {self.map(selfColumn => {
+                          if (selfColumn.id !== column.id) {
+                            return (
+                              <button
+                                key={selfColumn.name}
+                                type="submit"
+                                onClick={() =>
+                                  handleClick(selfColumn.id, column.id, card.id)}
+                              >
+                                {selfColumn.name}
+                              </button>
+                            );
+                          }
+                        })}
+                      </div>
                     </div>
                   );
                 }
