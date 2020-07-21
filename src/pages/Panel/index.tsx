@@ -7,6 +7,7 @@ import {
   FiDollarSign,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
+import { uuid } from 'uuidv4';
 import data from '../../data/panel-data.json';
 
 import { Container, TypesContainer, CardsContainer } from './styles';
@@ -29,20 +30,30 @@ const Panel: React.FC = () => {
   };
 
   function handleClick(to: string, from: string, cardId: string): void {
-    console.log(cards);
-    console.log(to, from, cardId);
-    // Achar o card com cardId
-    // mudar a coluna
-    // salvar no estado
     const newCards = cards.map(card =>
       card.id === cardId ? { ...card, column: to } : card,
     );
     setCards(newCards);
   }
 
+  function handleCreateCard(): void {
+    const newCard = {
+      id: uuid(),
+      types: ['video'],
+      author: 'Leonardo',
+      title: `${panelStructure.domainName} criada`,
+      column: panelStructure.columns[0].id,
+    };
+
+    setCards([...cards, newCard]);
+  }
+
   return (
     <>
       <h1>{panelStructure.domainName}</h1>
+      <button type="submit" onClick={handleCreateCard}>
+        {`Criar ${panelStructure.domainName}`}
+      </button>
       <Container>
         {panelStructure.columns.map((column, _, self) => (
           <section key={column.id}>
