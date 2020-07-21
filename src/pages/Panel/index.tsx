@@ -21,7 +21,7 @@ const Panel: React.FC = () => {
     const type = 'type1';
     const state = 'state2';
     const TransitionButtons = transitions[type][state].map(transition => (
-      <button>{transition}</button>
+      <button type="button">{transition}</button>
     ));
     console.log(TransitionButtons);
   }, []);
@@ -104,10 +104,9 @@ const Panel: React.FC = () => {
                             return (
                               <button
                                 key={selfColumn.name}
-                                type="submit"
+                                type="button"
                                 onClick={() =>
-                                  handleClick(selfColumn.id, column.id, card.id)
-                                }
+                                  handleClick(selfColumn.id, column.id, card.id)}
                               >
                                 {selfColumn.name}
                               </button>
