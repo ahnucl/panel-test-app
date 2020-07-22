@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from 'react';
-
 import { uuid } from 'uuidv4';
-import CardTypesMapper from '../../data/CardTypesMapper';
 
+import CardTypesMapper from '../../data/CardTypesMapper';
 import data from '../../data/panel-data.json';
 import dataNew from '../../data/panel-data-new-format.json';
 
 import { Container, TypesContainer, CardsContainer, Header } from './styles';
+import State from '../../components/State';
 
-interface State {
-  id: string;
-  title: string;
-  color: string;
-}
+// interface State {
+//   id: string;
+//   title: string;
+//   color: string;
+// }
 
-interface Item {
-  id: string;
-  title: string;
-  author: string;
-  type: string;
-  state: string;
-}
+// interface Item {
+//   id: string;
+//   title: string;
+//   author: string;
+//   type: string;
+//   state: string;
+// }
 
-interface Type {}
+// interface Type {}
 
-interface Transition {}
+// interface Transition {}
 
 const Panel: React.FC = () => {
   const [panelColumns] = useState(data.panels[1]);
@@ -36,11 +36,9 @@ const Panel: React.FC = () => {
    */
   const panelNumber = 0;
   const [title, setTitle] = useState(dataNew.panels[panelNumber].title);
-  const [states, setStates] = useState<State[]>(
-    dataNew.panels[panelNumber].states,
-  );
+  const [states, setStates] = useState(dataNew.panels[panelNumber].states);
   const [types, setTypes] = useState(dataNew.panels[panelNumber].types);
-  const [items, setItems] = useState<Item[]>(dataNew.panels[panelNumber].items);
+  const [items, setItems] = useState(dataNew.panels[panelNumber].items);
   const [transitions, setTransitions] = useState(
     dataNew.panels[panelNumber].transitions,
   );
@@ -53,7 +51,7 @@ const Panel: React.FC = () => {
   }
 
   function handleCreateItem(): void {
-    const newItem: Item = {
+    const newItem = {
       id: uuid(),
       title: 'Item criado: matéria',
       author: 'Leonardo',
@@ -72,6 +70,13 @@ const Panel: React.FC = () => {
           Novo Item
         </button>
       </Header>
+
+      <Container>
+        {states.map(state => (
+          <State stateData={state} />
+        ))}
+      </Container>
+
       <Container>
         {panelColumns.columns.map((column, _, self) => (
           <section key={column.id}>
@@ -127,7 +132,8 @@ const Panel: React.FC = () => {
                                 key={selfColumn.name}
                                 type="button"
                                 onClick={() =>
-                                  handleClick(selfColumn.id, column.id, card.id)}
+                                  handleClick(selfColumn.id, column.id, card.id)
+                                }
                               >
                                 {selfColumn.name}
                               </button>
