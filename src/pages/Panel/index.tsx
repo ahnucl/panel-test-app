@@ -13,9 +13,9 @@ import { Container, TypesContainer, CardsContainer } from './styles';
  */
 
 const Panel: React.FC = () => {
-  const [panelStructure] = useState(data.panels[1]);
-  const [cardTypes] = useState(panelStructure.cardTypes);
-  const [cards, setCards] = useState(panelStructure.data);
+  const [panelColumns] = useState(data.panels[1]);
+  const [cardTypes] = useState(panelColumns.cardTypes);
+  const [cards, setCards] = useState(panelColumns.data);
 
   useEffect(() => {
     const type = 'type1';
@@ -38,8 +38,8 @@ const Panel: React.FC = () => {
       id: uuid(),
       types: ['video'],
       author: 'Leonardo',
-      title: `${panelStructure.domainName} criada`,
-      column: panelStructure.columns[0].id,
+      title: `${panelColumns.domainName} criada`,
+      column: panelColumns.columns[0].id,
     };
 
     setCards([...cards, newCard]);
@@ -47,12 +47,12 @@ const Panel: React.FC = () => {
 
   return (
     <>
-      <h1>{panelStructure.domainName}</h1>
+      <h1>{panelColumns.domainName}</h1>
       <button type="submit" onClick={handleCreateCard}>
-        {`Criar ${panelStructure.domainName}`}
+        {`Criar ${panelColumns.domainName}`}
       </button>
       <Container>
-        {panelStructure.columns.map((column, _, self) => (
+        {panelColumns.columns.map((column, _, self) => (
           <section key={column.id}>
             <h2>{column.name}</h2>
 
@@ -106,7 +106,8 @@ const Panel: React.FC = () => {
                                 key={selfColumn.name}
                                 type="button"
                                 onClick={() =>
-                                  handleClick(selfColumn.id, column.id, card.id)}
+                                  handleClick(selfColumn.id, column.id, card.id)
+                                }
                               >
                                 {selfColumn.name}
                               </button>
