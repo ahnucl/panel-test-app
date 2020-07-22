@@ -1,0 +1,121 @@
+{
+  "panels": [
+    {
+      "id": "painel1",
+      "title": "Painel 1",
+      "types": [
+        {
+          "id": "theme",
+          "title": "Matéria",
+          "icon": "FiFileMinus"
+        },
+        {
+          "id": "handout",
+          "title": "Comunicado",
+          "icon": "FiMessageCircle"
+        },
+        {
+          "id": "event",
+          "name": "Evento",
+          "icon": "FiCalendar"
+        },
+        {
+          "id": "ad",
+          "name": "Anúncio",
+          "icon": "FiDollarSign"
+        }
+      ],
+      "states": [
+        {
+          "id": "private",
+          "name": "privados",
+          "color": "#ff1001"
+        },
+        {
+          "id": "revision",
+          "name": "Revisão pendente",
+          "color": "#ffa501"
+        },
+        {
+          "id":"released",
+          "title": "Liberados",
+          "color": "#086912"
+        },
+        {
+          "id": "published",
+          "name": "Publicados",
+          "color": "#0f8bdf"
+        }
+      ],
+      "items": [
+        {
+          "id":"item1",
+          "type": "theme",
+          "author": "Guaraci Alves",
+          "title": "Título da matéria",
+          "state": "private"
+        },
+        {
+          "id":"item2",
+          "type": "event",
+          "author": "Gabriel Cunha",
+          "title": "Título do evento",
+          "state": "published"
+        },
+        {
+          "id":"item3",
+          "type": "handout",
+          "author": "Maria Costa",
+          "title": "Comunico que alguma coisa",
+          "state": "private"
+        },
+        {
+          "id":"item4",
+          "type": "ad",
+          "author": "Leonardo",
+          "title": "Título do anúncio",
+          "state": "published"
+        }
+      ],
+      "transitions": {
+        "theme": {
+          "private": [
+            "revision"
+          ],
+          "revision": [
+            "private",
+            "released"
+          ],
+          "released": [
+            "private",
+            "revision",
+            "published"
+          ]
+        },
+        "handout": {
+          "private": [
+            "released"
+          ],
+          "released": [
+            "private",
+            "published"
+          ]
+        },
+        "evento": {
+          "private": [
+            "released"
+          ],
+          "released": [
+            "private",
+            "published"
+          ]
+        },
+        "ad": {
+          "private": [
+            "published"
+          ]
+        }
+      }
+    }
+  ]
+}

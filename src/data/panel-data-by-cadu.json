@@ -1,0 +1,179 @@
+{
+  "panels": [
+    {
+      "id": "painel1",
+      "title": "Painel 1",
+      "states": [
+        {
+          "id": "private",
+          "name": "privados",
+          "color": "#ff1001",
+          "types": [
+            {
+              "id": "theme",
+              "title": "Matéria",
+              "items": [
+                {
+                  "id":"item1",
+                  "author": "Guaraci Alves",
+                  "title": "Título da matéria"
+                }
+              ],
+              "transitions": [
+                "revision"
+              ]
+            },
+            {
+              "id": "handout",
+              "title": "Comunicado",
+              "items": [
+                {
+                  "id":"item3",
+                  "author": "Maria Costa",
+                  "title": "Comunico que alguma coisa"
+                }
+              ],
+              "transitions": [
+                "released"
+              ]
+            },
+            {
+              "id": "event",
+              "title": "Evento",
+              "items": [],
+              "transitions": [
+                "released"
+              ]
+            },
+            {
+              "id": "ad",
+              "title": "Anúncio",
+              "items": [],
+              "transitions": [
+                "published"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "revision",
+          "name": "Revisão pendente",
+          "color": "#ffa501",
+          "types": [
+            {
+              "id": "materia",
+              "title": "Matéria",
+              "items": [],
+              "transitions": [
+                "private",
+                "released"
+              ]
+            },
+            {
+              "id": "comunicado",
+              "title": "Comunicado",
+              "items": [],
+              "transitions": []
+            },
+            {
+              "id": "event",
+              "title": "Evento",
+              "items": [],
+              "transitions": []
+            },
+            {
+              "id": "ad",
+              "title": "Anúncio",
+              "items": [],
+              "transitions": []
+            }
+          ]
+        },
+        {
+          "id":"released",
+          "title": "Liberados",
+          "color": "#086912",
+          "types": [
+            {
+              "id": "theme",
+              "title": "Matéria",
+              "items": [],
+              "transitions": [
+                "private",
+                "revision",
+                "published"
+              ]
+            },
+            {
+              "id": "handout",
+              "title": "Comunicado",
+              "items": [],
+              "transitions": [
+                "private",
+                "published"
+              ]
+            },
+            {
+              "id": "event",
+              "title": "Evento",
+              "items": [],
+              "transitions": [
+                "private",
+                "published"
+              ]
+            },
+            {
+              "id": "ad",
+              "title": "Anúncio",
+              "items": [],
+              "transitions": []
+            }
+          ]
+        },
+        {
+          "id": "published",
+          "name": "Publicados",
+          "color": "#0f8bdf",
+          "types": [
+            {
+              "id": "theme",
+              "title": "Matéria",
+              "items": [],
+              "transitions": []
+            },
+            {
+              "id": "handout",
+              "title": "Comunicado",
+              "items": [],
+              "transitions": []
+            },
+            {
+              "id": "event",
+              "title": "Evento",
+              "items": [
+                {
+                  "id":"item2",
+                  "author": "Gabriel Cunha",
+                  "title": "Título do evento"
+                }
+              ],
+              "transitions": []
+            },
+            {
+              "id": "ad",
+              "title": "Anúncio",
+              "items": [
+                {
+                  "id":"item4",
+                  "author": "Leonardo",
+                  "title": "Título do anúncio"
+                }
+              ],
+              "transitions": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

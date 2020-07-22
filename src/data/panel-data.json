@@ -1,20 +1,20 @@
 {
   "panels": [
     {
-      "name": "materias",
-      "domainName": "Matérias",
+      "name": "painel1",
+      "domainName": "Painel 1",
       "cardTypes": [
         {
           "name": "video",
           "icon": "FiVideo"
         },
         {
-          "name": "paperclip",
+          "name": "audio",
           "icon": "FiSound2"
         },
         {
-          "name": "audio",
-          "icon": "FiPaperclip"
+          "name": "materia",
+          "icon": "FiFileMinus"
         }
       ],
       "columns": [
@@ -43,7 +43,7 @@
         {
           "id":"1",
           "types": [
-            "paperclip"
+            "materia"
           ],
           "author": "Fulano de Tal",
           "title": "Título",
@@ -60,12 +60,12 @@
           "icon": "FiVideo"
         },
         {
-          "name": "paperclip",
+          "name": "audio",
           "icon": "FiSound2"
         },
         {
-          "name": "audio",
-          "icon": "FiPaperclip"
+          "name": "materia",
+          "icon": "FiFileMinus"
         },
         {
           "name": "email",
@@ -126,7 +126,7 @@
         {
           "id":"23",
           "types": [
-            "paperclip"
+            "materia"
           ],
           "author": "Ciclano",
           "title": "Lorem Ipsum, bla blka bla",

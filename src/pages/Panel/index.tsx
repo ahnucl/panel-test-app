@@ -4,7 +4,7 @@ import { uuid } from 'uuidv4';
 import CardTypesMapper from '../../data/CardTypesMapper';
 
 import data from '../../data/panel-data.json';
-import transitions from '../../data/transitions.json';
+import transitions from '../../data/transitions-test.json';
 
 import { Container, TypesContainer, CardsContainer } from './styles';
 
@@ -23,7 +23,6 @@ const Panel: React.FC = () => {
     const TransitionButtons = transitions[type][state].map(transition => (
       <button type="button">{transition}</button>
     ));
-    console.log(TransitionButtons);
   }, []);
 
   function handleClick(to: string, from: string, cardId: string): void {
@@ -106,8 +105,7 @@ const Panel: React.FC = () => {
                                 key={selfColumn.name}
                                 type="button"
                                 onClick={() =>
-                                  handleClick(selfColumn.id, column.id, card.id)
-                                }
+                                  handleClick(selfColumn.id, column.id, card.id)}
                               >
                                 {selfColumn.name}
                               </button>
