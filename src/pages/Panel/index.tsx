@@ -4,26 +4,46 @@ import { uuid } from 'uuidv4';
 import CardTypesMapper from '../../data/CardTypesMapper';
 
 import data from '../../data/panel-data.json';
-import transitions from '../../data/transitions-test.json';
+import dataNew from '../../data/panel-data-new-format.json';
 
-import { Container, TypesContainer, CardsContainer } from './styles';
+import { Container, TypesContainer, CardsContainer, Header } from './styles';
 
-/**
- * Iterar pelas colunas, e futuramente por alguma regra de negócio para determinar as ações dos botões
- */
+interface State {
+  id: string;
+  title: string;
+  color: string;
+}
+
+interface Item {
+  id: string;
+  title: string;
+  author: string;
+  type: string;
+  state: string;
+}
+
+interface Type {}
+
+interface Transition {}
 
 const Panel: React.FC = () => {
   const [panelColumns] = useState(data.panels[1]);
   const [cardTypes] = useState(panelColumns.cardTypes);
   const [cards, setCards] = useState(panelColumns.data);
 
-  useEffect(() => {
-    const type = 'type1';
-    const state = 'state2';
-    const TransitionButtons = transitions[type][state].map(transition => (
-      <button type="button">{transition}</button>
-    ));
-  }, []);
+  /**
+   * New structure
+   */
+  const panelNumber = 0;
+  const [title, setTitle] = useState(dataNew.panels[panelNumber].title);
+  const [states, setStates] = useState<State[]>(
+    dataNew.panels[panelNumber].states,
+  );
+  const [types, setTypes] = useState(dataNew.panels[panelNumber].types);
+  const [items, setItems] = useState<Item[]>(dataNew.panels[panelNumber].items);
+  const [transitions, setTransitions] = useState(
+    dataNew.panels[panelNumber].transitions,
+  );
 
   function handleClick(to: string, from: string, cardId: string): void {
     const newCards = cards.map(card =>
@@ -32,24 +52,26 @@ const Panel: React.FC = () => {
     setCards(newCards);
   }
 
-  function handleCreateCard(): void {
-    const newCard = {
+  function handleCreateItem(): void {
+    const newItem: Item = {
       id: uuid(),
-      types: ['video'],
+      title: 'Item criado: matéria',
       author: 'Leonardo',
-      title: `${panelColumns.domainName} criada`,
-      column: panelColumns.columns[0].id,
+      type: types[0].id,
+      state: states[0].id,
     };
 
-    setCards([...cards, newCard]);
+    setItems([...items, newItem]);
   }
 
   return (
     <>
-      <h1>{panelColumns.domainName}</h1>
-      <button type="submit" onClick={handleCreateCard}>
-        {`Criar ${panelColumns.domainName}`}
-      </button>
+      <Header>
+        <h1>{title}</h1>
+        <button type="submit" onClick={handleCreateItem}>
+          Novo Item
+        </button>
+      </Header>
       <Container>
         {panelColumns.columns.map((column, _, self) => (
           <section key={column.id}>

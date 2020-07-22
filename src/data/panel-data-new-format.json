@@ -28,12 +28,12 @@
       "states": [
         {
           "id": "private",
-          "name": "privados",
+          "title": "privados",
           "color": "#ff1001"
         },
         {
           "id": "revision",
-          "name": "Revisão pendente",
+          "title": "Revisão pendente",
           "color": "#ffa501"
         },
         {
@@ -43,7 +43,7 @@
         },
         {
           "id": "published",
-          "name": "Publicados",
+          "title": "Publicados",
           "color": "#0f8bdf"
         }
       ],

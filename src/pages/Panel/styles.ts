@@ -1,11 +1,23 @@
 import styled from 'styled-components';
 
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  button {
+    margin-top: 10px;
+    padding: 5px;
+  }
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
 
   section {
+    /** Informações dos Estados, mover para o componente correto */
     width: 300px;
     display: flex;
     margin-top: 30px;
