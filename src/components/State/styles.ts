@@ -12,7 +12,7 @@ export const Column = styled.section<ColumnProps>`
   h2 {
     /* align-self: center; */
     padding-bottom: 5px;
-    border-bottom: solid 2px ${props => props.color};
+    /* border-bottom: solid 2px ${props => props.color}; */
   }
 
   flex-direction: column;

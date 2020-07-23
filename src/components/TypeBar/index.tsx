@@ -4,12 +4,6 @@ import { Container } from './styles';
 
 import CardTypesMap from '../../data/CardTypesMap';
 
-interface State {
-  id: string;
-  title: string;
-  color: string;
-}
-
 interface Type {
   id: string;
   title: string;
@@ -20,10 +14,6 @@ interface Type {
 interface TypeBarProps {
   typeArray: Type[];
   stateColor: string;
-  /**
-   * cor
-   * tipos + contagem
-   */
 }
 
 const TypeBar: React.FC<TypeBarProps> = ({ typeArray, stateColor }) => {

@@ -1,11 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { uuid } from 'uuidv4';
 
-import CardTypesMap from '../../data/CardTypesMap';
-import data from '../../data/panel-data.json';
 import dataNew from '../../data/panel-data-new-format.json';
+import CardTypesMap from '../../data/CardTypesMap';
 
-import { Container, TypesContainer, CardsContainer, Header } from './styles';
+import { Container, Header } from './styles';
 import StateColumn from '../../components/State';
 import Item from '../../components/Item';
 import TypeBar from '../../components/TypeBar';
@@ -41,13 +40,6 @@ interface TransitionMap {
 }
 
 const Panel: React.FC = () => {
-  const [panelColumns] = useState(data.panels[1]);
-  const [cardTypes] = useState(panelColumns.cardTypes);
-  const [cards, setCards] = useState(panelColumns.data);
-
-  /**
-   * New structure
-   */
   const panelNumber = 0;
   const [title] = useState(dataNew.panels[panelNumber].title);
   const [states] = useState(dataNew.panels[panelNumber].states);
@@ -120,84 +112,11 @@ const Panel: React.FC = () => {
                     transitions={transitions[item.type]}
                     handleTransition={handleClick}
                     states={states}
+                    TypeIcon={CardTypesMap[item.type]}
                   />
                 ),
             )}
           </StateColumn>
-        ))}
-      </Container>
-
-      <Container>
-        {panelColumns.columns.map((column, _, self) => (
-          <section key={column.id}>
-            <h2>{column.name}</h2>
-
-            <TypesContainer>
-              {/** Types space */}
-              {cardTypes.map(cardType => {
-                const IconToRender = CardTypesMap[cardType.name];
-
-                return (
-                  <div key={cardType.name}>
-                    <IconToRender />
-                    <span>
-                      {cards.reduce(
-                        (acc, cur) =>
-                          cur.column === column.id &&
-                          cur.types.includes(cardType.name)
-                            ? acc + 1
-                            : acc,
-                        0,
-                      )}
-                    </span>
-                  </div>
-                );
-              })}
-            </TypesContainer>
-
-            <CardsContainer>
-              {/** Card space */}
-              {cards.map(card => {
-                if (card.column === column.id) {
-                  const IconsToRender = card.types.map(
-                    type => CardTypesMap[type],
-                  );
-
-                  return (
-                    /** Isso aqui é um componente! Está retornando JSX */
-                    <div key={card.id}>
-                      <h3>
-                        {IconsToRender.map(Icon => (
-                          <Icon />
-                        ))}
-                        {card.title}
-                      </h3>
-                      <p>{card.author}</p>
-
-                      <div>
-                        {self.map(selfColumn => {
-                          if (selfColumn.id !== column.id) {
-                            return (
-                              <button
-                                key={selfColumn.name}
-                                type="button"
-                                // onClick={() =>
-                                //   handleClick(card.id, selfColumn.id)
-                                // }
-                              >
-                                {selfColumn.name}
-                              </button>
-                            );
-                          }
-                        })}
-                      </div>
-                    </div>
-                  );
-                }
-                return <> </>;
-              })}
-            </CardsContainer>
-          </section>
         ))}
       </Container>
     </>

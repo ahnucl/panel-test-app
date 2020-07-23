@@ -1,5 +1,6 @@
-import React from 'react';
-import { Card, ButtonContainer } from './styles';
+import React, { useState } from 'react';
+import { IconType } from 'react-icons';
+import { Card, ButtonContainer, Button } from './styles';
 
 import CardTypesMap from '../../data/CardTypesMap';
 
@@ -31,23 +32,16 @@ interface ItemProps {
   };
   handleTransition(cardId: string, to: string): void;
   states: State[];
+  TypeIcon: IconType;
 }
 
 const Item: React.FC<ItemProps> = ({
-  itemData: { id, type, author, title, state },
+  itemData: { id, author, title, state },
   transitions,
   handleTransition,
   states,
+  TypeIcon,
 }) => {
-  const TypeIcon = CardTypesMap[type];
-
-  // function handleTransition(cardId: string, to: string): void {
-  //   /** Com Redux seria só dispachar uma action...
-  //    *  Como não estou usando Redux agora, preciso passar a função como prop
-  //    */
-  //   console.log(cardId, to);
-  // }
-
   return (
     <Card>
       <h3>
@@ -57,16 +51,20 @@ const Item: React.FC<ItemProps> = ({
       <p>{author}</p>
       <ButtonContainer>
         {transitions[state as keyof typeof transitions]?.map(transition => (
-          <button
+          <Button
             key={transition}
             type="button"
             onClick={() => handleTransition(id, transition)}
+            color={states.reduce(
+              (acc, cur) => (cur.id === transition ? cur.color : acc),
+              '',
+            )}
           >
             {states.reduce(
               (acc, cur) => (cur.id === transition ? cur.title : acc),
               '',
             )}
-          </button>
+          </Button>
         ))}
       </ButtonContainer>
     </Card>
