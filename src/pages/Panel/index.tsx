@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { uuid } from 'uuidv4';
 
 import CardTypesMap from '../../data/CardTypesMap';
@@ -6,14 +6,15 @@ import data from '../../data/panel-data.json';
 import dataNew from '../../data/panel-data-new-format.json';
 
 import { Container, TypesContainer, CardsContainer, Header } from './styles';
-import State from '../../components/State';
+import StateColumn from '../../components/State';
 import Item from '../../components/Item';
+import TypeBar from '../../components/TypeBar';
 
-// interface State {
-//   id: string;
-//   title: string;
-//   color: string;
-// }
+interface State {
+  id: string;
+  title: string;
+  color: string;
+}
 
 // interface Item {
 //   id: string;
@@ -56,19 +57,17 @@ const Panel: React.FC = () => {
     dataNew.panels[panelNumber].transitions,
   );
 
-  function handleClick(cardId: string, to: string): void {
-    // const newCards = cards.map(card =>
-    //   card.id === cardId ? { ...card, column: to } : card,
-    // );
-    // setCards(newCards);
+  const handleClick = useCallback(
+    (cardId: string, to: string): void => {
+      const newItems = items.map(item =>
+        item.id === cardId ? { ...item, state: to } : item,
+      );
+      setItems(newItems);
+    },
+    [items],
+  );
 
-    const newItems = items.map(item =>
-      item.id === cardId ? { ...item, state: to } : item,
-    );
-    setItems(newItems);
-  }
-
-  function handleCreateItem(): void {
+  const handleCreateItem = useCallback((): void => {
     const newItem = {
       id: uuid(),
       title: 'Item criado: matéria',
@@ -78,7 +77,23 @@ const Panel: React.FC = () => {
     };
 
     setItems([...items, newItem]);
-  }
+  }, [items, states, types]);
+
+  const calculateTypesCountForState = useCallback(
+    (currentState: State): Type[] => {
+      return types.map(type => ({
+        ...type,
+        count: items.reduce(
+          (acc, cur) =>
+            cur.type === type.id && cur.state === currentState.id
+              ? acc + 1
+              : acc,
+          0,
+        ),
+      }));
+    },
+    [items, types],
+  );
 
   return (
     <>
@@ -91,8 +106,11 @@ const Panel: React.FC = () => {
 
       <Container>
         {states.map(state => (
-          <State key={state.id} stateData={state}>
-            {types.map(type => type.title)}
+          <StateColumn key={state.id} stateData={state}>
+            <TypeBar
+              typeArray={calculateTypesCountForState(state)}
+              stateColor={state.color}
+            />
             {items.map(
               item =>
                 item.state === state.id && (
@@ -105,7 +123,7 @@ const Panel: React.FC = () => {
                   />
                 ),
             )}
-          </State>
+          </StateColumn>
         ))}
       </Container>
 
