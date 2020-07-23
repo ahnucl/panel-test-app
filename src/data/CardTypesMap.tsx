@@ -12,11 +12,11 @@ import {
 const CardTypesMapper: { [index: string]: IconType } = {
   video: FiVideo,
   audio: FiVolume2,
-  materia: FiFileMinus,
+  theme: FiFileMinus,
   email: FiMail,
-  ads: FiDollarSign,
-  evento: FiCalendar,
-  comunicado: FiMessageCircle,
+  ad: FiDollarSign,
+  event: FiCalendar,
+  handout: FiMessageCircle,
 };
 
 export default CardTypesMapper;

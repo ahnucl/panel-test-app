@@ -13,7 +13,7 @@
           "icon": "FiSound2"
         },
         {
-          "name": "materia",
+          "name": "theme",
           "icon": "FiFileMinus"
         }
       ],
@@ -43,7 +43,7 @@
         {
           "id":"1",
           "types": [
-            "materia"
+            "theme"
           ],
           "author": "Fulano de Tal",
           "title": "Título",
@@ -64,7 +64,7 @@
           "icon": "FiSound2"
         },
         {
-          "name": "materia",
+          "name": "theme",
           "icon": "FiFileMinus"
         },
         {
@@ -72,7 +72,7 @@
           "icon": "FiMail"
         },
         {
-          "name": "ads",
+          "name": "ad",
           "icon": "FiDollarSign"
         }
       ],
@@ -126,7 +126,7 @@
         {
           "id":"23",
           "types": [
-            "materia"
+            "theme"
           ],
           "author": "Ciclano",
           "title": "Lorem Ipsum, bla blka bla",
@@ -135,7 +135,7 @@
         {
           "id":"24",
           "types": [
-            "ads"
+            "ad"
           ],
           "author": "Leonardo Cunha",
           "title": "Lorem Ipsum, bla blka bla",
@@ -144,7 +144,7 @@
         {
           "id":"25",
           "types": [
-            "ads",
+            "ad",
             "email"
           ],
           "author": "Leonardo Cunha",

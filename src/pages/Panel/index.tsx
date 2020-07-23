@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { uuid } from 'uuidv4';
 
-import CardTypesMapper from '../../data/CardTypesMapper';
+import CardTypesMap from '../../data/CardTypesMap';
 import data from '../../data/panel-data.json';
 import dataNew from '../../data/panel-data-new-format.json';
 
 import { Container, TypesContainer, CardsContainer, Header } from './styles';
 import State from '../../components/State';
+import Item from '../../components/Item';
 
 // interface State {
 //   id: string;
@@ -22,9 +23,21 @@ import State from '../../components/State';
 //   state: string;
 // }
 
-// interface Type {}
+interface Type {
+  id: string;
+  title: string;
+  icon?: string;
+  count: number;
+}
 
-// interface Transition {}
+interface TransitionMap {
+  [index: string]: {
+    private?: string[];
+    revision?: string[];
+    released?: string[];
+    published?: string[];
+  };
+}
 
 const Panel: React.FC = () => {
   const [panelColumns] = useState(data.panels[1]);
@@ -35,19 +48,24 @@ const Panel: React.FC = () => {
    * New structure
    */
   const panelNumber = 0;
-  const [title, setTitle] = useState(dataNew.panels[panelNumber].title);
-  const [states, setStates] = useState(dataNew.panels[panelNumber].states);
-  const [types, setTypes] = useState(dataNew.panels[panelNumber].types);
+  const [title] = useState(dataNew.panels[panelNumber].title);
+  const [states] = useState(dataNew.panels[panelNumber].states);
+  const [types] = useState(dataNew.panels[panelNumber].types);
   const [items, setItems] = useState(dataNew.panels[panelNumber].items);
-  const [transitions, setTransitions] = useState(
+  const [transitions] = useState<TransitionMap>(
     dataNew.panels[panelNumber].transitions,
   );
 
-  function handleClick(to: string, from: string, cardId: string): void {
-    const newCards = cards.map(card =>
-      card.id === cardId ? { ...card, column: to } : card,
+  function handleClick(cardId: string, to: string): void {
+    // const newCards = cards.map(card =>
+    //   card.id === cardId ? { ...card, column: to } : card,
+    // );
+    // setCards(newCards);
+
+    const newItems = items.map(item =>
+      item.id === cardId ? { ...item, state: to } : item,
     );
-    setCards(newCards);
+    setItems(newItems);
   }
 
   function handleCreateItem(): void {
@@ -73,7 +91,21 @@ const Panel: React.FC = () => {
 
       <Container>
         {states.map(state => (
-          <State stateData={state} />
+          <State key={state.id} stateData={state}>
+            {types.map(type => type.title)}
+            {items.map(
+              item =>
+                item.state === state.id && (
+                  <Item
+                    key={item.id}
+                    itemData={item}
+                    transitions={transitions[item.type]}
+                    handleTransition={handleClick}
+                    states={states}
+                  />
+                ),
+            )}
+          </State>
         ))}
       </Container>
 
@@ -85,7 +117,7 @@ const Panel: React.FC = () => {
             <TypesContainer>
               {/** Types space */}
               {cardTypes.map(cardType => {
-                const IconToRender = CardTypesMapper[cardType.name];
+                const IconToRender = CardTypesMap[cardType.name];
 
                 return (
                   <div key={cardType.name}>
@@ -110,7 +142,7 @@ const Panel: React.FC = () => {
               {cards.map(card => {
                 if (card.column === column.id) {
                   const IconsToRender = card.types.map(
-                    type => CardTypesMapper[type],
+                    type => CardTypesMap[type],
                   );
 
                   return (
@@ -131,9 +163,9 @@ const Panel: React.FC = () => {
                               <button
                                 key={selfColumn.name}
                                 type="button"
-                                onClick={() =>
-                                  handleClick(selfColumn.id, column.id, card.id)
-                                }
+                                // onClick={() =>
+                                //   handleClick(card.id, selfColumn.id)
+                                // }
                               >
                                 {selfColumn.name}
                               </button>
