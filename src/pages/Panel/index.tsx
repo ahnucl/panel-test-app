@@ -5,7 +5,7 @@ import dataNew from '../../data/panel-data-new-format.json';
 import CardTypesMap from '../../data/CardTypesMap';
 
 import { Container, Header } from './styles';
-import StateColumn from '../../components/State';
+import StateColumn from '../../components/StateColumn';
 import Item from '../../components/Item';
 import TypeBar from '../../components/TypeBar';
 

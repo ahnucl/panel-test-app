@@ -9,7 +9,7 @@ interface Props {
   };
 }
 
-const State: React.FC<Props> = ({
+const StateColumn: React.FC<Props> = ({
   children,
   stateData: { id, title, color },
 }) => {
@@ -21,4 +21,4 @@ const State: React.FC<Props> = ({
   );
 };
 
-export default State;
+export default StateColumn;
