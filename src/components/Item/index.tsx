@@ -84,8 +84,8 @@ const Item: React.FC<ItemProps & TesteProps & DispatchProps> = ({
           <Button
             key={transition}
             type="button"
-            // onClick={() => handleTransition(id, transition)}
-            onClick={() => testeRedux(id)}
+            onClick={() => handleTransition(id, transition)}
+            // onClick={() => testeRedux(id)}
             color={states.reduce(
               (acc, cur) => (cur.id === transition ? cur.color : acc),
               '',

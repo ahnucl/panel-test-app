@@ -5,12 +5,12 @@ interface ColumnProps {
 }
 
 export const Column = styled.section<ColumnProps>`
-  width: 300px;
+  width: 420px;
   display: flex;
   margin-top: 30px;
 
   h2 {
-    /* align-self: center; */
+    align-self: center;
     padding-bottom: 5px;
     /* border-bottom: solid 2px ${props => props.color}; */
   }

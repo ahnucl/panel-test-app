@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { uuid } from 'uuidv4';
 
+import ScrollMenu from 'react-horizontal-scrolling-menu';
 import dataNew from '../../data/panel-data-new-format.json';
 import CardTypesMap from '../../data/CardTypesMap';
 
@@ -97,6 +98,7 @@ const Panel: React.FC = () => {
       </Header>
 
       <Container>
+        {/* <ScrollMenu data= */}
         {states.map(state => (
           <StateColumn key={state.id} stateData={state}>
             <TypeBar
@@ -118,6 +120,7 @@ const Panel: React.FC = () => {
             )}
           </StateColumn>
         ))}
+        {/* /> */}
       </Container>
     </>
   );
