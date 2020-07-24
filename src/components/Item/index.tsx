@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IconType } from 'react-icons';
 import { connect } from 'react-redux';
 import { Card, ButtonContainer, Button } from './styles';
@@ -62,8 +62,12 @@ const Item: React.FC<ItemProps & TesteProps & DispatchProps> = ({
   testeRedux,
   teste: { data },
 }) => {
+  const [cardColor] = useState(
+    states.find(stateFind => stateFind.id === state)?.color,
+  );
+
   return (
-    <Card>
+    <Card color={cardColor}>
       <h3>
         <TypeIcon />
         {title}
@@ -74,8 +78,8 @@ const Item: React.FC<ItemProps & TesteProps & DispatchProps> = ({
           <Button
             key={transition}
             type="button"
-            // onClick={() => handleTransition(id, transition)}
-            onClick={() => testeRedux(id)}
+            onClick={() => handleTransition(id, transition)}
+            // onClick={() => testeRedux(id)}
             color={states.reduce(
               (acc, cur) => (cur.id === transition ? cur.color : acc),
               '',

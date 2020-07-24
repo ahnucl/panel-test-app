@@ -50,8 +50,8 @@
           "allowExpressions": true
         }
       ],
-      "camelcase":"off"
-
+      "camelcase":"off",
+      "no-shadow": "off"
     },
     "settings": {
       "import/resolver": {

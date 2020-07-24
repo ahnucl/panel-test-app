@@ -4,13 +4,19 @@ interface ButtonProps {
   color: string;
 }
 
-export const Card = styled.div`
+interface CardProps {
+  color?: string;
+}
+
+export const Card = styled.div<CardProps>`
   height: 120px;
   padding: 5px;
   margin: 5px;
+  background: #fff;
 
-  border: solid 1px;
-  border-radius: 5px;
+  border-left: solid 7px
+    ${props => (props.color === undefined ? '' : props.color)};
+  /* border-radius: 5px; */
 
   display: flex;
   flex-direction: column;
