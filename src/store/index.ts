@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 import data from '../data/panel-data-new-format.json';
 
 interface Item {
@@ -66,6 +66,6 @@ const itemsReducer = (
   }
 };
 
-const store = createStore(itemsReducer);
+const store = createStore(itemsReducer, composeWithDevTools());
 console.log(store.getState());
 export default store;
