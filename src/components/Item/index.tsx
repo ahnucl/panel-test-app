@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { IconType } from 'react-icons';
 import { connect } from 'react-redux';
 import { Card, ButtonContainer, Button } from './styles';
-import { ItemState } from '../../store/ducks/items/types';
+
+interface ItemState {
+  readonly data: Item[];
+  readonly loading: boolean;
+  readonly error: boolean;
+}
 
 interface Item {
   id: string;
@@ -78,8 +83,8 @@ const Item: React.FC<ItemProps & TesteProps & DispatchProps> = ({
           <Button
             key={transition}
             type="button"
-            onClick={() => handleTransition(id, transition)}
-            // onClick={() => testeRedux(id)}
+            // onClick={() => handleTransition(id, transition)}
+            onClick={() => testeRedux(id)}
             color={states.reduce(
               (acc, cur) => (cur.id === transition ? cur.color : acc),
               '',
@@ -105,7 +110,7 @@ const mapStateToProps = (state: ItemState): TesteProps => ({
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   testeRedux(cardId: string) {
-    dispatch({ type: 'TO_PUBLISHED', cardId });
+    dispatch({ type: 'TO_PUBLISHED', payload: { cardId } });
   },
 });
 
