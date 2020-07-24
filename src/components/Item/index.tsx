@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IconType } from 'react-icons';
+import { connect } from 'react-redux';
 import { Card, ButtonContainer, Button } from './styles';
+import { ItemState } from '../../store/ducks/items/types';
 
-import CardTypesMap from '../../data/CardTypesMap';
+interface Item {
+  id: string;
+  title: string;
+  author: string;
+  type: string;
+  state: string;
+}
 
 interface Type {
   id: string;
@@ -14,6 +22,16 @@ interface State {
   id: string;
   title: string;
   color: string;
+}
+
+interface TesteProps {
+  teste: {
+    data: Item[];
+  };
+}
+
+interface DispatchProps {
+  testeRedux: (cardId: string) => void;
 }
 
 interface ItemProps {
@@ -35,12 +53,14 @@ interface ItemProps {
   TypeIcon: IconType;
 }
 
-const Item: React.FC<ItemProps> = ({
+const Item: React.FC<ItemProps & TesteProps & DispatchProps> = ({
   itemData: { id, author, title, state },
   transitions,
   handleTransition,
   states,
   TypeIcon,
+  testeRedux,
+  teste: { data },
 }) => {
   return (
     <Card>
@@ -54,7 +74,8 @@ const Item: React.FC<ItemProps> = ({
           <Button
             key={transition}
             type="button"
-            onClick={() => handleTransition(id, transition)}
+            // onClick={() => handleTransition(id, transition)}
+            onClick={() => testeRedux(id)}
             color={states.reduce(
               (acc, cur) => (cur.id === transition ? cur.color : acc),
               '',
@@ -71,4 +92,17 @@ const Item: React.FC<ItemProps> = ({
   );
 };
 
-export default Item;
+const mapStateToProps = (state: ItemState): TesteProps => ({
+  teste: {
+    data: state.data,
+  },
+});
+
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const mapDispatchToProps = (dispatch: any): DispatchProps => ({
+  testeRedux(cardId: string) {
+    dispatch({ type: 'TO_PUBLISHED', cardId });
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

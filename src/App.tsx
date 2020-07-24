@@ -1,8 +1,11 @@
 import React from 'react';
 
+import { Provider } from 'react-redux';
 import GlobalStyle from './styles/global';
 
 import Panel from './pages/Panel';
+
+import store from './store';
 
 const App: React.FC = () => {
   return (
@@ -11,7 +14,9 @@ const App: React.FC = () => {
       {/* <BrowserRouter>
         <Routes />
       </BrowserRouter> */}
-      <Panel />
+      <Provider store={store}>
+        <Panel />
+      </Provider>
       <GlobalStyle />
     </>
   );
