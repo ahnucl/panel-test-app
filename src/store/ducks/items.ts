@@ -1,11 +1,15 @@
 import data from '../../data/panel-data-new-format.json';
+/**
+ * Para mudar o painel mudar a linha abaixo
+ */
+const panelNumber = 0;
 
 /**
  * Action Types
  */
 export enum ItemActionTypes {
   TO_PRIVATE = 'TO_PRIVATE',
-  TO_REVISION = 'TO_REVISION',
+  TO_REVIEW = 'TO_REVISION',
   TO_RELEASE = 'TO_RELEASE',
   TO_PUBLISHED = 'TO_PUBLISHED',
 }
@@ -37,7 +41,6 @@ export interface ItemsState {
 /**
  * Initial state
  */
-const panelNumber = 0;
 const INITIAL_STATE = {
   data: data.panels[panelNumber].items,
   loading: false,
@@ -47,13 +50,35 @@ const INITIAL_STATE = {
 /**
  * Action Creators
  */
-export function publishItem(itemId: string): void {}
+export const Creators = {
+  returnCardToPrivate: (cardId: string): ItemAction => ({
+    type: ItemActionTypes.TO_PRIVATE,
+    payload: {
+      cardId,
+    },
+  }),
 
-export function returnItemToPrivate(itemId: string): void {}
+  sendCardToReview: (cardId: string): ItemAction => ({
+    type: ItemActionTypes.TO_REVIEW,
+    payload: {
+      cardId,
+    },
+  }),
 
-export function sendItemToReview(itemId: string): void {}
+  releaseCard: (cardId: string): ItemAction => ({
+    type: ItemActionTypes.TO_RELEASE,
+    payload: {
+      cardId,
+    },
+  }),
 
-export function releaseItem(itemId: string): void {}
+  publishCard: (cardId: string): ItemAction => ({
+    type: ItemActionTypes.TO_PUBLISHED,
+    payload: {
+      cardId,
+    },
+  }),
+};
 
 /**
  * Item reducer
@@ -64,23 +89,14 @@ export default function itemsReducer(
 ): ItemsState {
   switch (action.type) {
     case ItemActionTypes.TO_PRIVATE: {
-      return state;
-    }
-    case ItemActionTypes.TO_REVISION: {
-      return state;
-    }
-    case ItemActionTypes.TO_RELEASE: {
-      return state;
-    }
-    case ItemActionTypes.TO_PUBLISHED: {
-      // const card = state.filter(item => item.id === action.payload.cardId);
+      // Encapsular esse bloco?
       const card = state.data.find(
         item => item.id === action.payload.cardId,
       ) as Item;
       const index = state.data.indexOf(card);
+      //
 
-      // card[0].state = 'revision';
-      card.state = 'revision';
+      card.state = 'private';
 
       return {
         data: [
@@ -91,8 +107,60 @@ export default function itemsReducer(
         loading: false,
         error: false,
       };
+    }
+    case ItemActionTypes.TO_REVIEW: {
+      const card = state.data.find(
+        item => item.id === action.payload.cardId,
+      ) as Item;
+      const index = state.data.indexOf(card);
 
-      return state;
+      card.state = 'review';
+
+      return {
+        data: [
+          ...state.data.slice(0, index),
+          card, // Deixar o item modificado na mesma posição
+          ...state.data.slice(index + 1, state.data.length),
+        ],
+        loading: false,
+        error: false,
+      };
+    }
+    case ItemActionTypes.TO_RELEASE: {
+      const card = state.data.find(
+        item => item.id === action.payload.cardId,
+      ) as Item;
+      const index = state.data.indexOf(card);
+
+      card.state = 'released';
+
+      return {
+        data: [
+          ...state.data.slice(0, index),
+          card, // Deixar o item modificado na mesma posição
+          ...state.data.slice(index + 1, state.data.length),
+        ],
+        loading: false,
+        error: false,
+      };
+    }
+    case ItemActionTypes.TO_PUBLISHED: {
+      const card = state.data.find(
+        item => item.id === action.payload.cardId,
+      ) as Item;
+      const index = state.data.indexOf(card);
+
+      card.state = 'published';
+
+      return {
+        data: [
+          ...state.data.slice(0, index),
+          card, // Deixar o item modificado na mesma posição
+          ...state.data.slice(index + 1, state.data.length),
+        ],
+        loading: false,
+        error: false,
+      };
     }
     default:
       return state;
