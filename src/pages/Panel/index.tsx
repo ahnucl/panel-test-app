@@ -1,9 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { uuid } from 'uuidv4';
-
+import { useSelector, useDispatch } from 'react-redux';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
+
 import dataNew from '../../data/panel-data-new-format.json';
 import CardTypesMap from '../../data/CardTypesMap';
+import { RootState, AppDispatch } from '../../store';
+import { Creators } from '../../store/ducks/items';
 
 import { Container, Header } from './styles';
 import StateColumn from '../../components/StateColumn';
@@ -42,34 +45,52 @@ interface TransitionMap {
 
 const Panel: React.FC = () => {
   const panelNumber = 0;
-  const [title] = useState(dataNew.panels[panelNumber].title);
-  const [states] = useState(dataNew.panels[panelNumber].states);
-  const [types] = useState(dataNew.panels[panelNumber].types);
-  const [items, setItems] = useState(dataNew.panels[panelNumber].items);
+  const {
+    panel: {
+      data: { title },
+    },
+    state: { data: states },
+    items: { data: items },
+    types: { data: types },
+  } = useSelector((state: RootState) => state);
+  const dispatch: AppDispatch = useDispatch();
+  // const [states] = useState(dataNew.panels[panelNumber].states);
+  // const [types] = useState(dataNew.panels[panelNumber].types);
+  // const [items, setItems] = useState(dataNew.panels[panelNumber].items);
   const [transitions] = useState<TransitionMap>(
     dataNew.panels[panelNumber].transitions,
   );
 
-  const handleClick = useCallback(
-    (cardId: string, to: string): void => {
-      const newItems = items.map(item =>
-        item.id === cardId ? { ...item, state: to } : item,
-      );
-      setItems(newItems);
-    },
-    [items],
-  );
+  // const handleClick = useCallback(
+  //   (cardId: string, to: string): void => {
+  //     const newItems = items.map(item =>
+  //       item.id === cardId ? { ...item, state: to } : item,
+  //     );
+  //     setItems(newItems);
+  //   },
+  //   [items],
+  // );
+  function handleClick(): void {}
 
   const handleCreateItem = useCallback((): void => {
     const newItem = {
-      id: uuid(),
+      cardId: uuid(),
       title: 'Item criado: matéria',
       author: 'Leonardo',
       type: types[0].id,
-      state: states[0].id,
+      cardState: states[0].id,
     };
 
-    setItems([...items, newItem]);
+    // setItems([...items, newItem]);
+    dispatch(
+      Creators.createCard(
+        uuid(),
+        states[0].id,
+        'Leonardo 2',
+        'Item criado via dispatch: matéria',
+        types[0].id,
+      ),
+    );
   }, [items, states, types]);
 
   const calculateTypesCountForState = useCallback(

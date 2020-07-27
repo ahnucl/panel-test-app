@@ -2,7 +2,7 @@
   "panels": [
     {
       "id": "painel1",
-      "title": "Painel 1",
+      "title": "Painel 1 - Teste",
       "types": [
         {
           "id": "theme",
