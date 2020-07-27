@@ -51,7 +51,8 @@
         }
       ],
       "camelcase":"off",
-      "no-shadow": "off"
+      "no-shadow": "off",
+      "array-callback-return": "off"
     },
     "settings": {
       "import/resolver": {

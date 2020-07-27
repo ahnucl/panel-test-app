@@ -1,8 +1,4 @@
-import data from '../../data/panel-data-new-format.json';
-/**
- * Para mudar o painel mudar a linha abaixo
- */
-const panelNumber = 0;
+import data from '../dataProvider';
 
 /**
  * Action Types
@@ -42,7 +38,7 @@ export interface ItemsState {
  * Initial state
  */
 const INITIAL_STATE = {
-  data: data.panels[panelNumber].items,
+  data: data.items,
   loading: false,
   error: false,
 };
