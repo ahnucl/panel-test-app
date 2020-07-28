@@ -1,109 +1,20 @@
-import data from '../dataProvider';
-
-/**
- * Action Types
- */
-export enum ItemActionTypes {
-  TO_PRIVATE = 'TO_PRIVATE',
-  TO_REVIEW = 'TO_REVISION',
-  TO_RELEASE = 'TO_RELEASE',
-  TO_PUBLISHED = 'TO_PUBLISHED',
-  NEW_ITEM = 'NEW_ITEM',
-}
-
-interface ItemAction {
-  type: ItemActionTypes;
-  payload: {
-    id: string;
-    state?: string;
-    author?: string;
-    title?: string;
-    type?: string;
-  };
-}
-
-/**
- * Item description
- */
-export interface Item {
-  id: string;
-  title: string;
-  author: string;
-  type: string;
-  state: string;
-}
-
-export interface ItemsState {
-  readonly data: Item[];
-  readonly loading: boolean;
-  readonly error: boolean;
-}
+import { Reducer } from 'redux';
+import data from '../../dataProvider';
+import { ItemsState, ItemActionTypes, Item } from './types';
 
 /**
  * Initial state
  */
-const INITIAL_STATE = {
+const INITIAL_STATE: ItemsState = {
   data: data.items,
   loading: false,
   error: false,
 };
 
 /**
- * Action Creators
- */
-export const Creators = {
-  returnCardToPrivate: (cardId: string): ItemAction => ({
-    type: ItemActionTypes.TO_PRIVATE,
-    payload: {
-      id: cardId,
-    },
-  }),
-
-  sendCardToReview: (cardId: string): ItemAction => ({
-    type: ItemActionTypes.TO_REVIEW,
-    payload: {
-      id: cardId,
-    },
-  }),
-
-  releaseCard: (cardId: string): ItemAction => ({
-    type: ItemActionTypes.TO_RELEASE,
-    payload: {
-      id: cardId,
-    },
-  }),
-
-  publishCard: (cardId: string): ItemAction => ({
-    type: ItemActionTypes.TO_PUBLISHED,
-    payload: {
-      id: cardId,
-    },
-  }),
-  createCard: (
-    cardId: string,
-    cardState: string,
-    title: string,
-    author: string,
-    type: string,
-  ): ItemAction => ({
-    type: ItemActionTypes.NEW_ITEM,
-    payload: {
-      id: cardId,
-      state: cardState,
-      author,
-      title,
-      type,
-    },
-  }),
-};
-
-/**
  * Item reducer
  */
-export default function itemsReducer(
-  state: ItemsState = INITIAL_STATE,
-  action: ItemAction,
-): ItemsState {
+export const reducer: Reducer<ItemsState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ItemActionTypes.TO_PRIVATE: {
       // Encapsular esse bloco?
@@ -181,6 +92,7 @@ export default function itemsReducer(
     }
     case ItemActionTypes.NEW_ITEM: {
       const newCard = action.payload as Item;
+      console.log(newCard);
       return {
         data: [...state.data, newCard],
         loading: false,
@@ -190,4 +102,6 @@ export default function itemsReducer(
     default:
       return state;
   }
-}
+};
+
+export default reducer;

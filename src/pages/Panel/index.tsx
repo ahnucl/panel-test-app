@@ -6,7 +6,7 @@ import ScrollMenu from 'react-horizontal-scrolling-menu';
 import dataNew from '../../data/panel-data-new-format.json';
 import CardTypesMap from '../../data/CardTypesMap';
 import { RootState, AppDispatch } from '../../store';
-import { Creators } from '../../store/ducks/items';
+import { createCard } from '../../store/ducks/items/actions';
 
 import { Container, Header } from './styles';
 import StateColumn from '../../components/StateColumn';
@@ -74,23 +74,15 @@ const Panel: React.FC = () => {
 
   const handleCreateItem = useCallback((): void => {
     const newItem = {
-      cardId: uuid(),
+      id: uuid(),
       title: 'Item criado: matéria',
       author: 'Leonardo',
       type: types[0].id,
-      cardState: states[0].id,
+      state: states[0].id,
     };
 
     // setItems([...items, newItem]);
-    dispatch(
-      Creators.createCard(
-        uuid(),
-        states[0].id,
-        'Leonardo 2',
-        'Item criado via dispatch: matéria',
-        types[0].id,
-      ),
-    );
+    dispatch(createCard(newItem));
   }, [items, states, types]);
 
   const calculateTypesCountForState = useCallback(

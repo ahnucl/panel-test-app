@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IconType } from 'react-icons';
 import { connect } from 'react-redux';
 import { Card, ButtonContainer, Button } from './styles';
-import { Creators } from '../../store/ducks/items';
+import { publishCard } from '../../store/ducks/items/actions';
 
 interface ItemState {
   readonly data: Item[];
@@ -111,7 +111,7 @@ const mapStateToProps = (state: ItemState): TesteProps => ({
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   testeRedux(cardId: string) {
-    dispatch(Creators.publishCard(cardId));
+    dispatch(publishCard(cardId));
   },
 });
 
