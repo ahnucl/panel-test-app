@@ -8,6 +8,7 @@ export const Column = styled.section<ColumnProps>`
   width: 420px;
   display: flex;
   margin-top: 30px;
+  background-color: #f4f4f4;
 
   h2 {
     align-self: center;
